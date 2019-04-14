@@ -63,6 +63,7 @@ int main()
 	cout<<"Number of pages "<<n<<endl;
 	vector<int> counter;
 	int c=1;
+	auto start = std::chrono::high_resolution_clock::now();
 	for(int i=0;i<n;i++)
 	{
 	   a = pages.at(i);
@@ -98,9 +99,12 @@ int main()
 	   
 	   c++;
 	}
-	cout<<endl;
+
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
 	cout<<"number of page faults are "<<fault<<endl;
 	cout<<"number of page hits are "<<hit<<endl;
+	cout<<"Elapsed time "<<elapsed.count()<<endl;
 	   
 	return 0;
 }

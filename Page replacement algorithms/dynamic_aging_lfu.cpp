@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include<time.h>
+#include<chrono>
 using namespace std;
 class NFUCache {
     private:
@@ -93,9 +93,13 @@ int main() {
 	cin>>frame_size;
 	pages = createData(file_name);
 	NFUCache cache(frame_size);
+	auto start = std::chrono::high_resolution_clock::now();
 	for(int i=0; i<pages.size(); i++){
 		cache.findAndUpdate(pages.at(i));
 	}
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
 	cout<<"Number of pages "<<pages.size()<<endl;
+	cout<<"Elapsed time "<<elapsed.count()<<endl;
 	cache.printData();
 }

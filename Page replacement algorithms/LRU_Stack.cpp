@@ -44,6 +44,7 @@ int main()
 	vector<int> v, pages = createData(file_name);
 	n = pages.size();
 	vector<int>::iterator it;
+	auto start = std::chrono::high_resolution_clock::now();
 	for(int i=0;i<n;i++)
 	{
 		a = pages.at(i);
@@ -77,9 +78,11 @@ int main()
 	}
 
 
-	cout<<endl;
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
 	cout<<"Number of pages "<<n<<endl;
 	cout<<"number of page faults are "<<fault<<endl;
 	cout<<"number of page hits are "<<hit<<endl;
+	cout<<"Elapsed time "<<elapsed.count()<<endl;
 	return 0;
 }

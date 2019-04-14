@@ -75,7 +75,11 @@ int main() {
 	pages = createData(file_name);
 	cout<<"Number of pages "<<pages.size()<<endl;
 	ChanceLRU cache(frame_size);
+	auto start = std::chrono::high_resolution_clock::now();
 	for(int i=0; i<pages.size(); i++)cache.findAndUpdate(pages.at(i));
+	auto finish = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double> elapsed = finish - start;
+	cout<<"Elapsed time "<<elapsed.count()<<endl;
 	cache.printData();
 	
 }
