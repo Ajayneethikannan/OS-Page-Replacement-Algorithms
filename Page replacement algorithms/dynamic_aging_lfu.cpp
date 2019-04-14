@@ -5,7 +5,7 @@ class NFUCache {
     private:
     	int frame_size, page_faults, page_hits;
     	int *arr;
-    	float *frequency;
+    	int *frequency;
     	void replaceAndUpdate(int page) {
     		page_faults++;
     		// find least frequently used page //
@@ -22,9 +22,10 @@ class NFUCache {
     		arr[lfu_page] = page;
     		frequency[lfu_page] = 1;
     	}
-    	void updateFrequencies() {
+    	void updateFrequencies(int frame) {
     		for(int i=0;i <frame_size; i++) {
-    			frequency[i] *= 0.9 ; //exponential decay
+    			 frequency[i] >> 1 ; //exponential decay
+    			 if(i == frame) frequency[i] += 1 << 14; //Since range is 2^15
 			}
 		}
 
@@ -35,7 +36,7 @@ class NFUCache {
     		page_hits=0;
     		frame_size=size;
     		arr = (int*)calloc(sizeof(int), frame_size);
-    		frequency = (float*)calloc(sizeof(float), frame_size);
+    		frequency = (int*)calloc(sizeof(int), frame_size);
     		for(int i=0; i<frame_size; i++){
     			frequency[i] = 0;
     		}
@@ -51,15 +52,17 @@ class NFUCache {
     				frequency[i] = frequency[i] + 1;
     				found = true;
     				page_hits++;
+    				updateFrequencies(i);
     				break;
     			}
     		}
     		// if cache is full find and replace the least frequently used page // 
     		if(found == false){
     			replaceAndUpdate(page);
+    			updateFrequencies(-1);
     		}
     		
-    		updateFrequencies();
+    		
     	}
 
     	void printData() {
