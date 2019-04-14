@@ -51,7 +51,7 @@ class ChanceLRU {
 		}
 	
 };
-vector<int> createData(string file_name) {
+vector<int> createData(string file_name) { //dirty hack for getting only numbers between 0 and 9
 char ch;
 vector<int>pages;
 fstream fin(file_name.c_str(), fstream::in);
@@ -73,6 +73,7 @@ int main() {
 	cout<<"Enter number of frames"<<endl;
 	cin>>frame_size;
 	pages = createData(file_name);
+	cout<<"Number of pages "<<pages.size()<<endl;
 	ChanceLRU cache(frame_size);
 	for(int i=0; i<pages.size(); i++)cache.findAndUpdate(pages.at(i));
 	cache.printData();

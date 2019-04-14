@@ -78,6 +78,7 @@ int main()
 
 
 	cout<<endl;
+	cout<<"Number of pages "<<n<<endl;
 	cout<<"number of page faults are "<<fault<<endl;
 	cout<<"number of page hits are "<<hit<<endl;
 	return 0;

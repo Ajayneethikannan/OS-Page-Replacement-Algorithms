@@ -60,13 +60,12 @@ int main()
 	cin>>file_name;
 	vector<int> v, pages = createData(file_name);
 	n = pages.size();
-	cout<<n<<endl;
+	cout<<"Number of pages "<<n<<endl;
 	vector<int> counter;
 	int c=1;
 	for(int i=0;i<n;i++)
 	{
 	   a = pages.at(i);
-	   cout<<a<<endl;
 	   if(v.empty())
 	   {
 	       v.push_back(a);
@@ -98,10 +97,6 @@ int main()
 	   }
 	   
 	   c++;
-	}
-	for(int i=0;i<v.size();i++)
-	{
-	    cout<<v[i]<<" ";
 	}
 	cout<<endl;
 	cout<<"number of page faults are "<<fault<<endl;
