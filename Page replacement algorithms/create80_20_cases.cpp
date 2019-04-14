@@ -2,19 +2,21 @@
 #include<time.h>
 using namespace std;
 int main() {
-	srand(time(0));
-	int n = rand() % 1000000;  //upto 10^6
+  ofstream myfile;
+  myfile.open ("80_20.txt");
+	int n = 1000000; 
 	while(n--) {
 		int percent = rand()%100;
-		if(percent < 20) cout<<(int)rand() % 3 <<" ";
+		if(percent < 20) myfile<<(int)rand() % 3 <<" ";
 		else {
 			switch(rand() % 3) {
-				case 0: cout<< 7 <<" ";
-				case 1: cout<< 8 <<" ";
-				case 2: cout<< 9<<" ";
-				default: cout<< rand() % 10 << " ";
+				case 0: myfile<< 7 <<" "; break;
+				case 1: myfile<< 8 <<" "; break;
+				case 2: myfile<< 9<<" ";  break;
+				default: myfile<< rand() % 10 << " ";
 			}
 		}
 	}
+	  myfile.close();
 }
 
